@@ -4,9 +4,15 @@ import { Link } from "react-router-dom";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [usernameFocused, setUsernameFocused] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
+  const [loginHovered, setLoginHovered] = useState(false);
+  const [createHovered, setCreateHovered] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+    // Form submission logic
+    console.log("Login attempt:", { username, password });
   };
 
   return (
@@ -30,10 +36,17 @@ export default function Login() {
           justifyContent: "center",
           padding: "12px 0",
           cursor: "pointer",
+          transition: "opacity 0.2s ease",
         }}
         role="button"
         tabIndex={0}
         aria-label="English (US)"
+        onMouseEnter={(e) => {
+          e.currentTarget.style.opacity = "0.7";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.opacity = "1";
+        }}
       >
         <div
           style={{
@@ -123,10 +136,11 @@ export default function Login() {
                   flexDirection: "row",
                   padding: "10px 16px",
                   backgroundColor: "rgb(28, 43, 51)",
-                  border: "1px solid rgb(70, 90, 105)",
+                  border: usernameFocused ? "1px solid rgb(0, 100, 224)" : "1px solid rgb(70, 90, 105)",
                   borderRadius: "12px",
                   cursor: "pointer",
                   pointerEvents: "auto",
+                  transition: "border-color 0.2s ease",
                 }}
               >
                 {/* Placeholder Label */}
@@ -136,7 +150,7 @@ export default function Login() {
                     alignItems: "center",
                     flexDirection: "row",
                     position: "absolute",
-                    opacity: username ? 0 : 1,
+                    opacity: username || usernameFocused ? 0 : 1,
                     paddingRight: 0,
                     transition: "opacity 0.2s ease",
                     pointerEvents: "none",
@@ -171,6 +185,8 @@ export default function Login() {
                     name="username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                    onFocus={() => setUsernameFocused(true)}
+                    onBlur={() => setUsernameFocused(false)}
                     placeholder=""
                     dir="auto"
                     autoCapitalize="off"
@@ -188,6 +204,7 @@ export default function Login() {
                       minHeight: "22px",
                       outline: "none",
                       width: "100%",
+                      pointerEvents: "auto",
                     }}
                   />
                 </div>
@@ -231,10 +248,11 @@ export default function Login() {
                   flexDirection: "row",
                   padding: "10px 16px",
                   backgroundColor: "rgb(28, 43, 51)",
-                  border: "1px solid rgb(70, 90, 105)",
+                  border: passwordFocused ? "1px solid rgb(0, 100, 224)" : "1px solid rgb(70, 90, 105)",
                   borderRadius: "12px",
                   cursor: "pointer",
                   pointerEvents: "auto",
+                  transition: "border-color 0.2s ease",
                 }}
               >
                 {/* Placeholder Label */}
@@ -244,7 +262,7 @@ export default function Login() {
                     alignItems: "center",
                     flexDirection: "row",
                     position: "absolute",
-                    opacity: password ? 0 : 1,
+                    opacity: password || passwordFocused ? 0 : 1,
                     paddingRight: 0,
                     transition: "opacity 0.2s ease",
                     pointerEvents: "none",
@@ -279,6 +297,8 @@ export default function Login() {
                     name="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    onFocus={() => setPasswordFocused(true)}
+                    onBlur={() => setPasswordFocused(false)}
                     placeholder=""
                     dir="auto"
                     autoCapitalize="off"
@@ -296,6 +316,7 @@ export default function Login() {
                       minHeight: "22px",
                       outline: "none",
                       width: "100%",
+                      pointerEvents: "auto",
                     }}
                   />
                 </div>
@@ -328,6 +349,8 @@ export default function Login() {
               <button
                 type="submit"
                 onClick={handleLogin}
+                onMouseEnter={() => setLoginHovered(true)}
+                onMouseLeave={() => setLoginHovered(false)}
                 tabIndex={0}
                 role="button"
                 aria-label="Log in"
@@ -341,6 +364,7 @@ export default function Login() {
                   cursor: "pointer",
                   background: "none",
                   padding: 0,
+                  transition: "all 0.2s ease",
                 }}
               >
                 <div
@@ -350,7 +374,7 @@ export default function Login() {
                     flexGrow: 1,
                     paddingLeft: "20px",
                     paddingRight: "20px",
-                    backgroundColor: "rgb(0, 100, 224)",
+                    backgroundColor: loginHovered ? "rgb(30, 130, 255)" : "rgb(0, 100, 224)",
                     border: "0px solid rgb(28, 43, 51)",
                     borderRadius: "22px",
                     display: "flex",
@@ -359,6 +383,7 @@ export default function Login() {
                     flexDirection: "row",
                     opacity: 1,
                     pointerEvents: "none",
+                    transition: "background-color 0.2s ease",
                   }}
                 >
                   <div
@@ -419,6 +444,9 @@ export default function Login() {
                 role="button"
                 aria-label="Forgot password?"
                 data-anchor-id="replay"
+                onClick={() => {
+                  // Navigate to forgot password page
+                }}
                 style={{
                   height: "100%",
                   width: "100%",
@@ -428,6 +456,13 @@ export default function Login() {
                   cursor: "pointer",
                   background: "none",
                   padding: 0,
+                  transition: "opacity 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.opacity = "0.7";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.opacity = "1";
                 }}
               >
                 <div style={{ pointerEvents: "none" }}>
@@ -538,6 +573,11 @@ export default function Login() {
                 role="button"
                 aria-label="Create new account"
                 data-anchor-id="replay"
+                onClick={() => {
+                  // Navigate to signup page
+                }}
+                onMouseEnter={() => setCreateHovered(true)}
+                onMouseLeave={() => setCreateHovered(false)}
                 style={{
                   height: "100%",
                   width: "100%",
@@ -547,6 +587,7 @@ export default function Login() {
                   cursor: "pointer",
                   background: "none",
                   padding: 0,
+                  transition: "all 0.2s ease",
                 }}
               >
                 <div
@@ -556,8 +597,8 @@ export default function Login() {
                     flexGrow: 1,
                     paddingLeft: "20px",
                     paddingRight: "20px",
-                    backgroundColor: "rgba(255, 255, 255, 0)",
-                    border: "1px solid rgb(69, 153, 254)",
+                    backgroundColor: createHovered ? "rgba(255, 255, 255, 0.05)" : "rgba(255, 255, 255, 0)",
+                    border: createHovered ? "1px solid rgb(100, 173, 254)" : "1px solid rgb(69, 153, 254)",
                     borderRadius: "22px",
                     display: "flex",
                     alignItems: "center",
@@ -565,6 +606,7 @@ export default function Login() {
                     flexDirection: "row",
                     opacity: 1,
                     pointerEvents: "none",
+                    transition: "all 0.2s ease",
                   }}
                 >
                   <div
@@ -583,11 +625,12 @@ export default function Login() {
                         fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                         fontWeight: 500,
                         letterSpacing: "-0.08px",
-                        color: "rgb(71, 165, 250)",
+                        color: createHovered ? "rgb(100, 173, 254)" : "rgb(71, 165, 250)",
                         lineHeight: 1.248,
                         display: "block",
                         textAlign: "start",
                         overflow: "hidden",
+                        transition: "color 0.2s ease",
                       }}
                     >
                       Create new account
