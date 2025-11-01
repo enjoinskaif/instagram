@@ -8,11 +8,16 @@ export default function Login() {
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [loginHovered, setLoginHovered] = useState(false);
   const [createHovered, setCreateHovered] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     // Form submission logic
     console.log("Login attempt:", { username, password });
+  };
+
+  const handleCreateAccount = () => {
+    setShowErrorModal(true);
   };
 
   return (
