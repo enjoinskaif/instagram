@@ -1,6 +1,18 @@
 /** @import must precede all other statements */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
 
+@font-face {
+  font-family: "Optimistic Text Normal";
+  font-weight: 400;
+  src: url("https://static.cdninstagram.com/rsrc.php/v4/yl/r/8Z0HzPqL6f0.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Optimistic Text Medium";
+  font-weight: 500;
+  src: url("https://static.cdninstagram.com/rsrc.php/v4/yF/r/r0lQFcB8LLZ.ttf") format("truetype");
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
