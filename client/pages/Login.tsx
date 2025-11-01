@@ -9,6 +9,7 @@ export default function Login() {
   const [loginHovered, setLoginHovered] = useState(false);
   const [createHovered, setCreateHovered] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const [showAccessDeniedModal, setShowAccessDeniedModal] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
