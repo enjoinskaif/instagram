@@ -96,7 +96,7 @@ export default function Login() {
         </div>
 
         {/* Sign Up Button */}
-        <button className="w-full py-2 border border-blue-400 hover:border-blue-300 text-blue-400 hover:text-blue-300 font-semibold rounded text-base transition-colors">
+        <button className="w-full py-2 border border-[#0095F6] hover:border-[#0083D8] text-[#0095F6] hover:text-[#0083D8] font-semibold rounded text-base transition-colors">
           Create new account
         </button>
 
