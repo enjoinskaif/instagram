@@ -7,112 +7,633 @@ export default function Login() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900 flex flex-col items-center justify-center px-4 py-8">
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: "100%",
+        width: "100%",
+        paddingBottom: 0,
+        backgroundColor: "#0a0e11",
+        minHeight: "100vh",
+      }}
+    >
       {/* Language Selector */}
-      <div className="absolute top-4 left-4 md:top-6 md:left-6">
-        <button className="text-gray-400 text-xs font-normal hover:text-gray-300 transition-colors">
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "12px 0",
+          cursor: "pointer",
+        }}
+        role="button"
+        tabIndex={0}
+        aria-label="English (US)"
+      >
+        <div
+          style={{
+            fontSize: "13px",
+            fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+            fontWeight: 400,
+            color: "rgb(203, 210, 217)",
+            letterSpacing: "-0.04px",
+            lineHeight: 1.43,
+          }}
+        >
           English (US)
-        </button>
+        </div>
       </div>
 
-      {/* Main Container */}
-      <div className="w-full max-w-sm flex flex-col items-center">
-        {/* Instagram Logo */}
-        <div className="flex justify-center mb-16 md:mb-20">
-          <div className="w-28 h-28 md:w-32 md:h-32 relative">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-full h-full"
+      {/* Instagram Logo Container */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexGrow: 1,
+          flexShrink: 100,
+          marginTop: 0,
+          marginBottom: "20px",
+          pointerEvents: "none",
+        }}
+      >
+        <img
+          alt="Instagram from Meta"
+          src="https://static.cdninstagram.com/rsrc.php/v4/yk/r/iyazeqxfbpL.png"
+          style={{
+            maxHeight: "60px",
+            minHeight: 0,
+            objectFit: "contain",
+            overflow: "hidden",
+          }}
+          role="heading"
+        />
+      </div>
+
+      {/* Form Container */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          pointerEvents: "none",
+          width: "100%",
+          maxWidth: "350px",
+          margin: "0 auto",
+          paddingLeft: "16px",
+          paddingRight: "16px",
+        }}
+      >
+        {/* Username Input */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: 0,
+            pointerEvents: "none",
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0)",
+              display: "flex",
+              flexDirection: "column",
+              pointerEvents: "none",
+            }}
+          >
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                pointerEvents: "none",
+              }}
             >
-              <defs>
-                <linearGradient
-                  id="instagramGradient"
-                  x1="0%"
-                  y1="100%"
-                  x2="100%"
-                  y2="0%"
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexDirection: "row",
+                  padding: "10px 16px",
+                  backgroundColor: "rgb(28, 43, 51)",
+                  border: "1px solid rgb(70, 90, 105)",
+                  borderRadius: "12px",
+                  cursor: "pointer",
+                  pointerEvents: "auto",
+                }}
+              >
+                {/* Placeholder Label */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "row",
+                    position: "absolute",
+                    opacity: username ? 0 : 1,
+                    paddingRight: 0,
+                    transition: "opacity 0.2s ease",
+                    pointerEvents: "none",
+                  }}
                 >
-                  <stop offset="0%" style={{ stopColor: "#feda75", stopOpacity: 1 }} />
-                  <stop offset="5%" style={{ stopColor: "#fa7e1e", stopOpacity: 1 }} />
-                  <stop offset="45%" style={{ stopColor: "#d92e7f", stopOpacity: 1 }} />
-                  <stop offset="60%" style={{ stopColor: "#9b36b7", stopOpacity: 1 }} />
-                  <stop offset="90%" style={{ stopColor: "#515bd4", stopOpacity: 1 }} />
-                </linearGradient>
-              </defs>
-              <rect x="2" y="2" width="20" height="20" rx="4" stroke="url(#instagramGradient)" strokeWidth="1.2" />
-              <circle cx="12" cy="12" r="3.5" stroke="url(#instagramGradient)" strokeWidth="1.2" />
-              <circle cx="17" cy="7" r="0.8" fill="url(#instagramGradient)" />
-            </svg>
+                  <div
+                    style={{
+                      fontSize: "16px",
+                      fontFamily: '"Optimistic Text Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                      fontWeight: 400,
+                      color: "rgb(133, 149, 164)",
+                      lineHeight: 1.3,
+                      display: "block",
+                      overflow: "hidden",
+                    }}
+                  >
+                    Username, email or mobile number
+                  </div>
+                </div>
+
+                {/* Input Field */}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    flexGrow: 1,
+                    pointerEvents: "none",
+                  }}
+                >
+                  <input
+                    type="email"
+                    name="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder=""
+                    dir="auto"
+                    autoCapitalize="off"
+                    autoComplete="on"
+                    autoCorrect="off"
+                    aria-label="Username, email or mobile number"
+                    style={{
+                      background: "transparent",
+                      border: "none",
+                      color: "rgb(255, 255, 255)",
+                      fontFamily: '"Optimistic Text Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                      fontSize: "16px",
+                      lineHeight: 1.3,
+                      caretColor: "rgb(255, 255, 255)",
+                      minHeight: "22px",
+                      outline: "none",
+                      width: "100%",
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Login Form */}
-        <form onSubmit={handleLogin} className="w-full space-y-3">
-          {/* Username Input */}
-          <div>
-            <input
-              type="text"
-              placeholder="Username, email or mobile number"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-slate-600 transition-colors"
-            />
-          </div>
-
-          {/* Password Input */}
-          <div>
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-slate-600 transition-colors"
-            />
-          </div>
-
-          {/* Login Button */}
-          <button
-            type="submit"
-            className="w-full py-2 bg-[#0095F6] hover:bg-[#0083D8] text-white font-semibold rounded text-base transition-colors mt-4"
+        {/* Password Input */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "12px",
+            marginBottom: 0,
+            pointerEvents: "none",
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0)",
+              display: "flex",
+              flexDirection: "column",
+              pointerEvents: "none",
+            }}
           >
-            Log in
-          </button>
-        </form>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                pointerEvents: "none",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexDirection: "row",
+                  padding: "10px 16px",
+                  backgroundColor: "rgb(28, 43, 51)",
+                  border: "1px solid rgb(70, 90, 105)",
+                  borderRadius: "12px",
+                  cursor: "pointer",
+                  pointerEvents: "auto",
+                }}
+              >
+                {/* Placeholder Label */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "row",
+                    position: "absolute",
+                    opacity: password ? 0 : 1,
+                    paddingRight: 0,
+                    transition: "opacity 0.2s ease",
+                    pointerEvents: "none",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: "16px",
+                      fontFamily: '"Optimistic Text Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                      fontWeight: 400,
+                      color: "rgb(133, 149, 164)",
+                      lineHeight: 1.3,
+                      display: "block",
+                      overflow: "hidden",
+                    }}
+                  >
+                    Password
+                  </div>
+                </div>
 
-        {/* Forgot Password */}
-        <div className="text-center w-full mt-3 mb-12">
-          <Link
-            to="/forgot-password"
-            className="text-sm text-gray-300 hover:text-gray-200 transition-colors font-normal"
-          >
-            Forgot password?
-          </Link>
+                {/* Input Field */}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    flexGrow: 1,
+                    pointerEvents: "none",
+                  }}
+                >
+                  <input
+                    type="password"
+                    name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder=""
+                    dir="auto"
+                    autoCapitalize="off"
+                    autoComplete="on"
+                    autoCorrect="off"
+                    aria-label="Password"
+                    style={{
+                      background: "transparent",
+                      border: "none",
+                      color: "rgb(255, 255, 255)",
+                      fontFamily: '"Optimistic Text Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                      fontSize: "16px",
+                      lineHeight: 1.3,
+                      caretColor: "rgb(255, 255, 255)",
+                      minHeight: "22px",
+                      outline: "none",
+                      width: "100%",
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Sign Up Button */}
-        <button className="w-full py-2 border border-[#0095F6] hover:border-[#0083D8] text-[#0095F6] hover:text-[#0083D8] font-semibold rounded text-base transition-colors">
-          Create new account
-        </button>
+        {/* Log In Button */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "stretch",
+            justifyContent: "center",
+            marginTop: "12px",
+            pointerEvents: "none",
+          }}
+        >
+          <div style={{ flexGrow: 1, cursor: "pointer", pointerEvents: "auto" }}>
+            <div
+              style={{
+                height: "100%",
+                width: "100%",
+                opacity: 1,
+                transform: "scaleX(1) scaleY(1)",
+                pointerEvents: "inherit",
+              }}
+            >
+              <button
+                type="submit"
+                onClick={handleLogin}
+                tabIndex={0}
+                role="button"
+                aria-label="Log in"
+                data-anchor-id="replay"
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  borderRadius: "22px",
+                  pointerEvents: "inherit",
+                  border: "none",
+                  cursor: "pointer",
+                  background: "none",
+                  padding: 0,
+                }}
+              >
+                <div
+                  style={{
+                    height: "44px",
+                    minWidth: "44px",
+                    flexGrow: 1,
+                    paddingLeft: "20px",
+                    paddingRight: "20px",
+                    backgroundColor: "rgb(0, 100, 224)",
+                    border: "0px solid rgb(28, 43, 51)",
+                    borderRadius: "22px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexDirection: "row",
+                    opacity: 1,
+                    pointerEvents: "none",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "row",
+                      opacity: 1,
+                      pointerEvents: "none",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: "16px",
+                        fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                        fontWeight: 500,
+                        letterSpacing: "-0.08px",
+                        color: "rgb(255, 255, 255)",
+                        lineHeight: 1.248,
+                        display: "block",
+                        textAlign: "start",
+                        overflow: "hidden",
+                      }}
+                    >
+                      Log in
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Forgot Password Button */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            paddingTop: "12px",
+            paddingBottom: 0,
+            pointerEvents: "none",
+          }}
+        >
+          <div style={{ flexGrow: 1, cursor: "pointer", pointerEvents: "auto" }}>
+            <div
+              style={{
+                height: "100%",
+                width: "100%",
+                opacity: 1,
+                pointerEvents: "inherit",
+              }}
+            >
+              <button
+                tabIndex={0}
+                role="button"
+                aria-label="Forgot password?"
+                data-anchor-id="replay"
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  borderRadius: 0,
+                  pointerEvents: "inherit",
+                  border: "none",
+                  cursor: "pointer",
+                  background: "none",
+                  padding: 0,
+                }}
+              >
+                <div style={{ pointerEvents: "none" }}>
+                  <div style={{ height: "36px", paddingLeft: "16px", paddingRight: "16px" }}>
+                    <div
+                      style={{
+                        height: "100%",
+                        width: "100%",
+                        opacity: 1,
+                        pointerEvents: "inherit",
+                      }}
+                    >
+                      <div
+                        style={{
+                          height: "100%",
+                          width: "100%",
+                          display: "flex",
+                          alignItems: "center",
+                          flexDirection: "row",
+                          justifyContent: "center",
+                          pointerEvents: "inherit",
+                        }}
+                      >
+                        <div>
+                          <div
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              opacity: 1,
+                              pointerEvents: "inherit",
+                            }}
+                          >
+                            <div
+                              style={{
+                                display: "flex",
+                                height: "100%",
+                                width: "100%",
+                                flexDirection: "row",
+                                pointerEvents: "inherit",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  fontSize: "16px",
+                                  fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                                  fontWeight: 500,
+                                  letterSpacing: "-0.08px",
+                                  color: "rgb(255, 255, 255)",
+                                  lineHeight: 1.248,
+                                  display: "block",
+                                  textAlign: "start",
+                                  overflow: "hidden",
+                                }}
+                              >
+                                Forgot password?
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Section with Create Account Button */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          flexGrow: 1,
+          flexShrink: 1000000,
+          paddingBottom: 0,
+          pointerEvents: "none",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "row",
+            justifyContent: "center",
+            pointerEvents: "none",
+            width: "100%",
+            maxWidth: "350px",
+            margin: "0 auto",
+            paddingLeft: "16px",
+            paddingRight: "16px",
+          }}
+        >
+          <div style={{ flexGrow: 1, cursor: "pointer", pointerEvents: "auto" }}>
+            <div
+              style={{
+                height: "100%",
+                width: "100%",
+                transform: "scaleX(1) scaleY(1)",
+                opacity: 1,
+                pointerEvents: "inherit",
+              }}
+            >
+              <button
+                tabIndex={0}
+                role="button"
+                aria-label="Create new account"
+                data-anchor-id="replay"
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  borderRadius: "22px",
+                  pointerEvents: "inherit",
+                  border: "none",
+                  cursor: "pointer",
+                  background: "none",
+                  padding: 0,
+                }}
+              >
+                <div
+                  style={{
+                    height: "44px",
+                    minWidth: "44px",
+                    flexGrow: 1,
+                    paddingLeft: "20px",
+                    paddingRight: "20px",
+                    backgroundColor: "rgba(255, 255, 255, 0)",
+                    border: "1px solid rgb(69, 153, 254)",
+                    borderRadius: "22px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexDirection: "row",
+                    opacity: 1,
+                    pointerEvents: "none",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "row",
+                      opacity: 1,
+                      pointerEvents: "none",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: "16px",
+                        fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                        fontWeight: 500,
+                        letterSpacing: "-0.08px",
+                        color: "rgb(71, 165, 250)",
+                        lineHeight: 1.248,
+                        display: "block",
+                        textAlign: "start",
+                        overflow: "hidden",
+                      }}
+                    >
+                      Create new account
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
 
         {/* Meta Footer */}
-        <div className="text-center mt-10">
-          <div className="flex items-center justify-center gap-1.5 text-gray-400 text-xs font-normal tracking-tight">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm0 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10z" />
-            </svg>
-            <span>Meta</span>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            paddingTop: "20px",
+            paddingBottom: "20px",
+            pointerEvents: "none",
+          }}
+        >
+          <div
+            style={{
+              height: "12px",
+              aspectRatio: "5 / 1",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              alt=""
+              src="https://static.cdninstagram.com/rsrc.php/v4/yp/r/eJmGMdNKxpD.png"
+              style={{
+                height: "100%",
+                width: "100%",
+                pointerEvents: "inherit",
+                maskImage: "url('https://static.cdninstagram.com/rsrc.php/v4/yM/r/DDgwTv3JehF.png')",
+                maskSize: "contain",
+                backgroundColor: "rgb(203, 210, 217)",
+                objectPosition: "10000px 10000px",
+                objectFit: "contain",
+                overflow: "hidden",
+              }}
+            />
           </div>
         </div>
       </div>
