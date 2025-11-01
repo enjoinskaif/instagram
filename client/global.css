@@ -4,13 +4,15 @@
 @font-face {
   font-family: "Optimistic Text Normal";
   font-weight: 400;
-  src: url("https://static.cdninstagram.com/rsrc.php/v4/yl/r/8Z0HzPqL6f0.ttf") format("truetype");
+  src: url("https://static.cdninstagram.com/rsrc.php/v4/yl/r/8Z0HzPqL6f0.ttf")
+    format("truetype");
 }
 
 @font-face {
   font-family: "Optimistic Text Medium";
   font-weight: 500;
-  src: url("https://static.cdninstagram.com/rsrc.php/v4/yF/r/r0lQFcB8LLZ.ttf") format("truetype");
+  src: url("https://static.cdninstagram.com/rsrc.php/v4/yF/r/r0lQFcB8LLZ.ttf")
+    format("truetype");
 }
 
 @tailwind base;
@@ -116,7 +118,7 @@
   }
 
   body {
-    background-color: #1C2B33;
+    background-color: #1c2b33;
     color: rgb(255, 255, 255);
   }
 
