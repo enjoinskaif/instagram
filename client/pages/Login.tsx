@@ -779,13 +779,22 @@ export default function Login() {
       )}
 
       <style>{`
-        @keyframes slideIn {
+        @keyframes fadeIn {
           from {
-            transform: scale(0.95);
             opacity: 0;
           }
           to {
-            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        @keyframes modalSlideIn {
+          from {
+            transform: scale(0.92) translateY(-20px);
+            opacity: 0;
+          }
+          to {
+            transform: scale(1) translateY(0);
             opacity: 1;
           }
         }
