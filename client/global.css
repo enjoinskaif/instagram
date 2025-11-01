@@ -116,7 +116,8 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: #0a0e11;
+    color: rgb(255, 255, 255);
   }
 
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
