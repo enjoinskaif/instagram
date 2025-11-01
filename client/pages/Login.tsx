@@ -693,45 +693,51 @@ export default function Login() {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            backgroundColor: "rgba(0, 0, 0, 0.65)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             zIndex: 1000,
+            animation: "fadeIn 0.15s ease-out",
           }}
           onClick={() => setShowErrorModal(false)}
+          role="dialog"
+          aria-modal="true"
         >
           <div
             style={{
               backgroundColor: "rgb(255, 255, 255)",
-              borderRadius: "12px",
-              padding: "24px",
-              maxWidth: "350px",
-              width: "90%",
-              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-              animation: "slideIn 0.2s ease-out",
+              borderRadius: "16px",
+              padding: "32px",
+              maxWidth: "400px",
+              width: "85%",
+              boxShadow: "0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1)",
+              animation: "modalSlideIn 0.25s cubic-bezier(0.14, 1, 0.34, 1)",
             }}
             onClick={(e) => e.stopPropagation()}
+            role="document"
           >
             {/* Modal Title and Description */}
-            <div style={{ marginBottom: "24px" }}>
+            <div style={{ marginBottom: "32px", textAlign: "center" }}>
               <div
                 style={{
-                  fontSize: "18px",
+                  fontSize: "20px",
                   fontWeight: 600,
                   color: "rgb(0, 0, 0)",
-                  marginBottom: "8px",
+                  marginBottom: "12px",
                   fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                  lineHeight: "1.2",
                 }}
               >
                 Too many accounts created
               </div>
               <div
                 style={{
-                  fontSize: "14px",
+                  fontSize: "15px",
                   color: "rgb(65, 65, 65)",
-                  lineHeight: 1.4,
+                  lineHeight: "1.4",
                   fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                  fontWeight: 400,
                 }}
               >
                 Too many accounts created from this device. Please login.
@@ -739,26 +745,30 @@ export default function Login() {
             </div>
 
             {/* OK Button */}
-            <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ display: "flex", justifyContent: "center", marginTop: "24px" }}>
               <button
                 onClick={() => setShowErrorModal(false)}
                 style={{
                   backgroundColor: "rgb(0, 100, 224)",
                   color: "white",
                   border: "none",
-                  borderRadius: "8px",
-                  padding: "10px 32px",
-                  fontSize: "14px",
+                  borderRadius: "20px",
+                  padding: "12px 48px",
+                  fontSize: "15px",
                   fontWeight: 600,
                   cursor: "pointer",
                   fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                  transition: "background-color 0.2s ease",
+                  transition: "all 0.2s ease",
+                  letterSpacing: "-0.08px",
+                  lineHeight: "1.248",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = "rgb(30, 130, 255)";
+                  e.currentTarget.style.transform = "scale(1.02)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = "rgb(0, 100, 224)";
+                  e.currentTarget.style.transform = "scale(1)";
                 }}
               >
                 OK
