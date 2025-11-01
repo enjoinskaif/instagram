@@ -18,7 +18,7 @@ export default function Login() {
         height: "100%",
         width: "100%",
         paddingBottom: 0,
-        backgroundColor: "#0a0e11",
+        backgroundColor: "#1C2B33",
         minHeight: "100vh",
       }}
     >
