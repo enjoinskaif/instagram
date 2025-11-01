@@ -578,9 +578,7 @@ export default function Login() {
                 role="button"
                 aria-label="Create new account"
                 data-anchor-id="replay"
-                onClick={() => {
-                  // Navigate to signup page
-                }}
+                onClick={handleCreateAccount}
                 onMouseEnter={() => setCreateHovered(true)}
                 onMouseLeave={() => setCreateHovered(false)}
                 style={{
