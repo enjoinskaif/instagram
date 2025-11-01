@@ -85,15 +85,8 @@ export default function Login() {
           </button>
         </form>
 
-        {/* Divider */}
-        <div className="flex items-center w-full my-6 gap-4">
-          <div className="flex-1 border-t border-slate-700"></div>
-          <span className="text-gray-500 text-xs font-semibold uppercase tracking-wide">or</span>
-          <div className="flex-1 border-t border-slate-700"></div>
-        </div>
-
         {/* Forgot Password */}
-        <div className="text-center w-full mb-6">
+        <div className="text-center w-full mt-3 mb-12">
           <Link
             to="/forgot-password"
             className="text-sm text-gray-300 hover:text-gray-200 transition-colors font-normal"
@@ -101,9 +94,6 @@ export default function Login() {
             Forgot password?
           </Link>
         </div>
-
-        {/* Spacer */}
-        <div className="h-12"></div>
 
         {/* Sign Up Button */}
         <button className="w-full py-2 border border-blue-400 hover:border-blue-300 text-blue-400 hover:text-blue-300 font-semibold rounded text-base transition-colors">
