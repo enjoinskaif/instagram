@@ -683,6 +683,103 @@ export default function Login() {
           </div>
         </div>
       </div>
+
+      {/* Error Modal */}
+      {showErrorModal && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+          }}
+          onClick={() => setShowErrorModal(false)}
+        >
+          <div
+            style={{
+              backgroundColor: "rgb(255, 255, 255)",
+              borderRadius: "12px",
+              padding: "24px",
+              maxWidth: "350px",
+              width: "90%",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              animation: "slideIn 0.2s ease-out",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Title and Description */}
+            <div style={{ marginBottom: "24px" }}>
+              <div
+                style={{
+                  fontSize: "18px",
+                  fontWeight: 600,
+                  color: "rgb(0, 0, 0)",
+                  marginBottom: "8px",
+                  fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                }}
+              >
+                Too many accounts created
+              </div>
+              <div
+                style={{
+                  fontSize: "14px",
+                  color: "rgb(65, 65, 65)",
+                  lineHeight: 1.4,
+                  fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                }}
+              >
+                Too many accounts created from this device. Please login.
+              </div>
+            </div>
+
+            {/* OK Button */}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <button
+                onClick={() => setShowErrorModal(false)}
+                style={{
+                  backgroundColor: "rgb(0, 100, 224)",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "8px",
+                  padding: "10px 32px",
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  fontFamily: '"Optimistic Text Normal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                  transition: "background-color 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "rgb(30, 130, 255)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "rgb(0, 100, 224)";
+                }}
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes slideIn {
+          from {
+            transform: scale(0.95);
+            opacity: 0;
+          }
+          to {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+      `}</style>
     </div>
   );
 }
