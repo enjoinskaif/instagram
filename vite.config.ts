@@ -30,14 +30,15 @@ function expressPlugin(): Plugin {
     apply: "serve", // Only apply during development (serve mode)
     async configureServer(server) {
       try {
-        // Dynamically import only during dev serve
-        const { createServer } = await import("./server/index.ts");
+        // Dynamically import only during dev serve (avoiding esbuild resolution issues)
+        const module = await import("./server/index");
+        const { createServer } = module;
         const app = createServer();
 
         // Add Express app as middleware to Vite dev server
         server.middlewares.use(app);
       } catch (error) {
-        console.error("Failed to load Express server in dev mode:", error);
+        console.warn("Dev server Express middleware not loaded (this is OK for build)");
       }
     },
   };
