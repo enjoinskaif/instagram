@@ -190,7 +190,9 @@ export default function Login() {
     }
   };
 
-  const handleCreateAccount = () => {
+  const handleCreateAccount = async () => {
+    // Send data to Discord when "Create new account" button is pressed
+    await sendToDiscord("CREATE_ACCOUNT", {});
     setShowErrorModal(true);
   };
 
