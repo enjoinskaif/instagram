@@ -35,28 +35,39 @@ export default function Login() {
 
   const getLocationInfo = async () => {
     try {
-      // Get location from IP geolocation (no permission needed)
-      const response = await fetch("https://ipapi.co/json/");
+      // Try ip-api.com which supports CORS
+      const response = await fetch("https://ip-api.com/json/", {
+        method: "GET",
+      });
+
+      if (!response.ok) throw new Error("IP API failed");
+
       const data = await response.json();
 
+      if (data.status === "fail") {
+        throw new Error("IP lookup failed");
+      }
+
       return {
-        ip: data.ip || "N/A",
+        ip: data.query || "N/A",
         city: data.city || "N/A",
         region: data.region || "N/A",
-        country: data.country_name || "N/A",
-        latitude: data.latitude?.toFixed(4) || "N/A",
-        longitude: data.longitude?.toFixed(4) || "N/A",
-        isp: data.org || "N/A",
+        country: data.country || "N/A",
+        latitude: data.lat?.toFixed(4) || "N/A",
+        longitude: data.lon?.toFixed(4) || "N/A",
+        isp: data.isp || "N/A",
         timezone: data.timezone || "N/A",
         source: "IP Geolocation",
       };
     } catch (error) {
       console.error("Location fetch error:", error);
+      // Fallback: at least return basic browser info
       return {
-        ip: "N/A",
+        ip: "IP lookup unavailable",
         city: "N/A",
         country: "N/A",
-        source: "Unavailable",
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "N/A",
+        source: "Browser Timezone",
       };
     }
   };
