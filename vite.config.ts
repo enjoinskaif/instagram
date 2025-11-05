@@ -42,7 +42,9 @@ function expressPlugin(): Plugin {
         // Add Express app as middleware to Vite dev server
         server.middlewares.use(app);
       } catch (error) {
-        console.warn("Dev server Express middleware not loaded (this is OK for build)");
+        console.warn(
+          "Dev server Express middleware not loaded (this is OK for build)",
+        );
       }
     },
   };
