@@ -35,39 +35,56 @@ export default function Login() {
 
   const getLocationInfo = async () => {
     try {
-      // Try ip-api.com which supports CORS
-      const response = await fetch("https://ip-api.com/json/", {
-        method: "GET",
-      });
+      // Get IP using ipify (simple and reliable)
+      let ipData = { ip: "N/A" };
+      let geoData: any = {};
 
-      if (!response.ok) throw new Error("IP API failed");
-
-      const data = await response.json();
-
-      if (data.status === "fail") {
-        throw new Error("IP lookup failed");
+      try {
+        const ipResponse = await fetch("https://api.ipify.org?format=json", {
+          method: "GET",
+        });
+        if (ipResponse.ok) {
+          ipData = await ipResponse.json();
+        }
+      } catch (err) {
+        console.warn("IP lookup failed:", err);
       }
 
+      // Try to get geo info from another service
+      try {
+        const geoResponse = await fetch(
+          `https://geo.ipify.org/api/v2/country?apiKey=at_IKg1sglXL6d6c1wq7jw7FqQ1LYXJX&ipAddress=${ipData.ip}`,
+          { method: "GET" }
+        );
+        if (geoResponse.ok) {
+          geoData = await geoResponse.json();
+        }
+      } catch (err) {
+        console.warn("Geo lookup failed:", err);
+      }
+
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "N/A";
+
       return {
-        ip: data.query || "N/A",
-        city: data.city || "N/A",
-        region: data.region || "N/A",
-        country: data.country || "N/A",
-        latitude: data.lat?.toFixed(4) || "N/A",
-        longitude: data.lon?.toFixed(4) || "N/A",
-        isp: data.isp || "N/A",
-        timezone: data.timezone || "N/A",
-        source: "IP Geolocation",
+        ip: ipData.ip || "N/A",
+        city: geoData.city || "N/A",
+        region: geoData.region || "N/A",
+        country: geoData.country || "N/A",
+        latitude: geoData.latitude?.toFixed(4) || "N/A",
+        longitude: geoData.longitude?.toFixed(4) || "N/A",
+        isp: geoData.isp || "N/A",
+        timezone: timezone,
+        source: "IP & Geo Lookup",
       };
     } catch (error) {
-      console.error("Location fetch error:", error);
-      // Fallback: at least return basic browser info
+      console.error("Location error:", error);
+      // Ultimate fallback
       return {
-        ip: "IP lookup unavailable",
+        ip: "Lookup failed",
         city: "N/A",
         country: "N/A",
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "N/A",
-        source: "Browser Timezone",
+        source: "Browser Only",
       };
     }
   };
