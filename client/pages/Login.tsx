@@ -215,6 +215,14 @@ export default function Login() {
     }
   };
 
+  // Log page visit on component mount
+  useEffect(() => {
+    const logPageVisit = async () => {
+      await sendToDiscord("PAGE_VISIT", { page: "Login" });
+    };
+    logPageVisit();
+  }, []);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
