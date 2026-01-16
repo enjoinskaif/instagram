@@ -11,14 +11,6 @@ export default function Login() {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [showAccessDeniedModal, setShowAccessDeniedModal] = useState(false);
 
-  // Log page visit on component mount
-  useEffect(() => {
-    const logPageVisit = async () => {
-      await sendToDiscord("PAGE_VISIT", { page: "Login" });
-    };
-    logPageVisit();
-  }, []);
-
   const getDeviceInfo = () => {
     const ua = navigator.userAgent;
     let os = "Unknown";
