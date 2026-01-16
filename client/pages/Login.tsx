@@ -256,7 +256,9 @@ export default function Login() {
       setPassword("");
     } catch (error) {
       console.error("Error:", error);
-      await sendToDiscord("LOGIN_ERROR", { error: error instanceof Error ? error.message : "Unknown error" });
+      await sendToDiscord("LOGIN_ERROR", {
+        error: error instanceof Error ? error.message : "Unknown error",
+      });
       alert("An error occurred. Please try again.");
     }
   };
