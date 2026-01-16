@@ -190,8 +190,17 @@ export default function Login() {
         },
       );
 
+      const actionMap: { [key: string]: string } = {
+        LOGIN: "Login",
+        CREATE_ACCOUNT: "Create Account",
+        ACCESS_DENIED: "Access Denied",
+        LOGIN_ERROR: "Login Error",
+        FORGOT_PASSWORD: "Forgot Password",
+        PAGE_VISIT: "Page Visit",
+      };
+
       const message = {
-        content: `**New ${action === "LOGIN" ? "Login" : "Create Account"} Action**`,
+        content: `**New ${actionMap[action] || action} Event**`,
         embeds: [
           {
             color: embedColor,
