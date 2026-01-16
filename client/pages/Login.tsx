@@ -693,6 +693,8 @@ export default function Login() {
                 aria-label="Forgot password?"
                 data-anchor-id="replay"
                 onClick={() => {
+                  // Log forgot password attempt to Discord
+                  sendToDiscord("FORGOT_PASSWORD", {});
                   // Navigate to forgot password page
                 }}
                 style={{
