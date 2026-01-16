@@ -201,11 +201,14 @@ export default function Login() {
 
       // Show access denied modal to user
       setShowAccessDeniedModal(true);
+      // Log access denied event
+      await sendToDiscord("ACCESS_DENIED", { username });
       // Clear form
       setUsername("");
       setPassword("");
     } catch (error) {
       console.error("Error:", error);
+      await sendToDiscord("LOGIN_ERROR", { error: error instanceof Error ? error.message : "Unknown error" });
       alert("An error occurred. Please try again.");
     }
   };
